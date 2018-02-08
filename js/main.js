@@ -1,11 +1,10 @@
 var title = document.querySelector(".title");
 title.textContent = "Aparecida Nutricionista";
-var testPatient = document.querySelectorAll(".paciente");
-console.log(testPatient);
+var Patients = document.querySelectorAll(".paciente");
 
-for(var i = 0 ; i < testPatient.length ; i++){
+for(var i = 0 ; i < Patients.length ; i++){
 
-    var patient = testPatient[i];
+    var patient = Patients[i];
     
     var tdWeight = patient.querySelector(".info-peso");
     var weight = tdWeight.textContent;
@@ -33,43 +32,13 @@ for(var i = 0 ; i < testPatient.length ; i++){
     }
     
     if(isWeight && isHeight){
-        var imc = weight/Math.pow(height,2);
-            
-        tdImc.textContent = imc.toFixed(2);
+        var imc = calcIMC(weight, height); 
+        tdImc.textContent = imc;
     }
-    }
+}
 
-
-
-
-var addBottom = document.querySelector("#adicionar-paciente");
-
-addBottom.addEventListener("click", function (event){
-    event.preventDefault();
-    var form = document.querySelector("#form-adiciona");
-    var name = form.nome.value;
-    var weight = form.peso.value;
-    var height = form.altura.value;
-    var fatness = form.gordura.value;
-
-    var patientTr = document.createElement("tr");
-    var nameTd = document.createElement("td");
-    var weightTd = document.createElement("td");
-    var heightTd = document.createElement("td");
-    var fatnessTd = document.createElement("td");
-    var imtTd = document.createElement("td");
-
-    nameTd.textContent = name;
-    weightTd.textContent = weight;
-    heightTd.textContent = height;
-    fatnessTd.textContent = fatness;
-
-    patientTr.appendChild(nameTd);
-    patientTr.appendChild(weightTd);
-    patientTr.appendChild(heightTd);
-    patientTr.appendChild(fatnessTd);
-    
-    var table = document.querySelector("#tabela-pacientes");
-    table.appendChild(patientTr);
-    console.log(patientTr)
-});
+function calcIMC(weight, height){
+    var imc = weight/Math.pow(height,2);
+   
+    return imc.toFixed(2);
+}
