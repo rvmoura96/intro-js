@@ -4,7 +4,14 @@ event.preventDefault();
 var form = document.querySelector("#form-adiciona");
 var patient = getFormInfo(form);
 var patientTr = createTr(patient);
+var error = validatePatient(patient);
 
+
+if(errors.length > 0){
+    var errorMsg = document.querySelector("#error-message")
+    errorMsg.textContent = error;
+    return;
+}
 var table = document.querySelector("#tabela-pacientes");
 table.appendChild(patientTr);
 form.reset();
@@ -47,5 +54,17 @@ function createTr(patient){
     patientTr.classList.add("paciente");
 
     return patientTr;
+}
+
+function validatePatient(patient){
+    var errors = [];
+
+    if(!validateWeight(patient.weight)){
+        errors.push("Peso Inválido");
+    }
+    if(!validateHeight(patient.height)){
+        errors.push("Altura Inválida");
+    }
+    return errors
 }
 
