@@ -3,7 +3,6 @@ addBottom.addEventListener("click", function (event){
 event.preventDefault();
 var form = document.querySelector("#form-adiciona");
 var patient = getFormInfo(form);
-var patientTr = createTr(patient);
 var errors = validatePatient(patient);
 
 if(errors.length > 0){
@@ -11,13 +10,18 @@ if(errors.length > 0){
     return;
 }
 
-var table = document.querySelector("#tabela-pacientes");
-table.appendChild(patientTr);
+addPatient(patient);
 
 form.reset();
 var errorMessages = document.querySelector("#error-messages")
 errorMessages.innerHTML = "";
 });
+
+function addPatient(patient){
+    var patientTr = createTr(patient);
+    var table = document.querySelector("#tabela-pacientes");
+    table.appendChild(patientTr);
+}
 
 function showErrorMessage(errors){
     var ul = document.querySelector("#error-messages");
@@ -31,10 +35,10 @@ function showErrorMessage(errors){
 
 function getFormInfo(form){
     var patient = {
-        name: form.nome.value,
-        weight: form.peso.value,
-        height: form.altura.value,
-        fatness: form.gordura.value,
+        nome: form.nome.value,
+        peso: form.peso.value,
+        altura: form.altura.value,
+        gordura: form.gordura.value,
         imc: calcIMC(form.peso.value, form.altura.value)
     }
     return patient;
@@ -50,10 +54,10 @@ function createTd(info, classParam){
 
 function createTr(patient){
     var patientTr = document.createElement("tr");
-    var nameTd = createTd(patient.name, "info-nome");
-    var weightTd = createTd(patient.weight, "info-peso");
-    var heightTd = createTd(patient.height, "info-altura");
-    var fatnessTd = createTd(patient.fatness, "info-gordura");
+    var nameTd = createTd(patient.nome, "info-nome");
+    var weightTd = createTd(patient.peso, "info-peso");
+    var heightTd = createTd(patient.altura, "info-altura");
+    var fatnessTd = createTd(patient.gordura, "info-gordura");
     var imcTd = createTd(patient.imc, "info-imc");
     
     patientTr.appendChild(nameTd);
@@ -66,25 +70,26 @@ function createTr(patient){
     return patientTr;
 }
 
+
 function validatePatient(patient){
     var errors = [];
 
-    if(patient.name == 0){
+    if(patient.nome == 0){
         errors.push("O nome não pode ser em branco");
     }
-    if(!validateWeight(patient.weight)){
+    if(!validateWeight(patient.peso)){
         errors.push("Peso Inválido");
     }
-    if(!validateHeight(patient.height)){
+    if(!validateHeight(patient.altura)){
         errors.push("Altura Inválida");
     }
-    if(patient.fatness.length == 0){
+    if(patient.gordura.length == 0){
         errors.push("Gordura não pode ser em branco");
     }
-    if(patient.weight.length == 0){
+    if(patient.peso.length == 0){
         errors.push("O peso não pode ser em branco");
     }
-    if(patient.height.length == 0){
+    if(patient.altura.length == 0){
         errors.push("A altura não pode ser em branco");
     }
     return errors;
