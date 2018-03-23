@@ -18,6 +18,8 @@
 		<main>
 			<section class="container">
 				<h2>Meus pacientes</h2>
+				<label for="table-filter">Filtre</label>
+				<input type="text" name="filter" id="table-filter" placeholder="Digite o Nome do Paciente">
 				<table>
 					<thead>
 						<tr>
@@ -69,12 +71,14 @@
 						</tr>
 					</tbody>
 				</table>
-
+				<button id="buscar-pacientes" class="botao bto-principal">Buscar Paciente</button>
 			</section>
 		</main>
 		<section class="container">
 			<h2 id="titulo-form">Adicionar novo paciente</h2>
-			<span id="error-message" class="alert alert-danger"></span>
+			<ul id="error-messages">
+
+			</ul>
 			<form id="form-adiciona">
 				<div class="grupo">
 					<label for="nome">Nome:</label>
@@ -97,5 +101,8 @@
 		</section>
 		<script src="js/main.js"></script>
 		<script src="js/form.js"></script>
+		<script src="js/remove-patient.js"></script>
+		<script src="js/filter.js"></script>
+		<script src="js/get-pacients.js"></script>
 	</body>
 </html>
